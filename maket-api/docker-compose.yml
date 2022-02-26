@@ -1,0 +1,22 @@
+version: "3"
+services:
+  maket-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5400:3000
+    volumes:
+      - .:/app
+      - "/app/node_modules"
+    depends_on:
+      - db
+  db:
+    image: mysql:5
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=maket_db
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=secret

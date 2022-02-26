@@ -4,11 +4,8 @@ import {
   Response,
   Router,
 } from "express";
+import { login } from "../../controllers/auth";
 
 const router = ExpressRouter();
-router.get("/", (req, res) => {
-  res.json({
-    data: "asdasd",
-  });
-});
+router.get("/", login);
 export const authRouter = router;
