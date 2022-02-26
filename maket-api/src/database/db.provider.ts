@@ -1,10 +1,7 @@
+import { config } from "./../configs";
 import { Sequelize } from "sequelize";
 
-const DB_USERNAME = process.env.DB_USERNAME || "dev";
-const DB_PASSWORD = process.env.DB_PASSWORD || "123456";
-const DB_HOST = process.env.DB_HOST || "localhost";
-const DB_PORT = process.env.DB_PORT || 3306;
-const DB_NAME = process.env.DB_NAME || "maket_db";
+const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD } = config;
 
 class DbProvider {
   public db: Sequelize;

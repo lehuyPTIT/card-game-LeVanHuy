@@ -6,7 +6,6 @@ import { IAuthUser } from "./../../database/models/user.model";
 import { IRequestExtended } from "./../../models/request-extended.model";
 class UserController {
   async createUser(req: IRequestExtended, res: Response) {
-    console.log("vao");
     const user = req.body as IAuthUser;
 
     user.password = await HASH_PASSWORD(user.password);

@@ -1,7 +1,5 @@
 import { Router as ExpressRouter, NextFunction, Response } from "express";
-
 import { IRequestExtended } from "../models";
-
 export class Router {
   router: ExpressRouter;
 
@@ -64,6 +62,14 @@ export class Router {
           await middleware(req, res);
         } catch (err) {
           return next(err);
+        }
+
+        if ((res as any)._eventsCount > 2) {
+          return res;
+        }
+
+        if (!res.headersSent) {
+          return next();
         }
 
         return res;

@@ -1,10 +1,10 @@
 import http from "http";
-
 import { app } from "./app";
+import { config } from "./configs";
 const server = http.createServer(app);
-const port = process.env.PORT || 3000;
+const { PORT } = config;
 
-server.listen(port, () => console.log(`App listening on port ${port}!`));
+server.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
 process.on("SIGTERM", () => {
   server.close(() => {
     process.exit(0);

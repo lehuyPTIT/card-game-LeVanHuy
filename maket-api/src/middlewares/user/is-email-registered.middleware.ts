@@ -10,8 +10,6 @@ export const isEmailRegisteredMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("vao1");
-
   const { email } = req.body;
   const emailValidity: Joi.ValidationResult<any> = emailValidator.validate({
     email,

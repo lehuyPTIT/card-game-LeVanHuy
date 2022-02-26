@@ -10,10 +10,8 @@ export const isEmailNotExistsMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("Vao");
   const { email } = req.body;
   const userWithSameEmail = await userService.getUserByPrams({ email });
-  console.log(userWithSameEmail);
   if (userWithSameEmail) {
     throw new ErrorHandler(
       ResponseStatusCodes.BAD_REQUEST,
@@ -21,5 +19,4 @@ export const isEmailNotExistsMiddleware = async (
       errors.BAD_REQUEST_USER_ALREADY_EXIST.code
     );
   }
-  console.log("vazzzzzzzzzzzzzzzz2222222");
 };

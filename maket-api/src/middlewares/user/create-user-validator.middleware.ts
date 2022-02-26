@@ -16,7 +16,6 @@ export const createUserValidatorMiddleware = (
     email,
     password,
   });
-  console.log(userValidity.error, "4444");
   if (userValidity.error) {
     throw new ErrorHandler(
       ResponseStatusCodes.BAD_REQUEST,

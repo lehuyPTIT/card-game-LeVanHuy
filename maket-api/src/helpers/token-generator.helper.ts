@@ -1,9 +1,11 @@
+import { config } from "./../configs";
 import { IAuthUser } from "./../database/models/user.model";
 import jwt from "jsonwebtoken";
-const JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET || "test";
-const JWT_REFRESH_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET || "key";
-const JWT_REFRESH_TOKEN_LIFETIME =
-  process.env.JWT_REFRESH_TOKEN_LIFETIME || 3600;
+const {
+  JWT_ACCESS_TOKEN_SECRET,
+  JWT_REFRESH_TOKEN_SECRET,
+  JWT_REFRESH_TOKEN_LIFETIME,
+} = config;
 
 export const generateToken = (
   payload: Partial<Pick<IAuthUser, "email" | "id">>
