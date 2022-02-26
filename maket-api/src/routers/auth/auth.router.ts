@@ -1,11 +1,13 @@
-import {
-  Router as ExpressRouter,
-  NextFunction,
-  Response,
-  Router,
-} from "express";
-import { login } from "../../controllers/auth";
+import { passwordValidatorMiddleware } from "./../../middlewares/auth/password.validator";
+import { isEmailRegisteredMiddleware } from "./../../middlewares/user/is-email-registered.middleware";
+import { Router } from "../custom-router";
+import { authController } from "../../controllers/auth";
 
-const router = ExpressRouter();
-router.get("/", login);
+const router = new Router();
+router.post(
+  "/",
+  isEmailRegisteredMiddleware,
+  passwordValidatorMiddleware,
+  authController.login
+);
 export const authRouter = router;

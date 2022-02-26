@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { ResponseStatusCodes } from "./constants";
-import { authRouter } from "./routers";
+import { appRouter } from "./routers";
 class App {
   public readonly app: express.Application = express();
   constructor() {
@@ -9,7 +9,7 @@ class App {
     this.app.set("jwtTokenSecret", "keySecrec");
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-    this.app.use(authRouter);
+    this.app.use(appRouter);
     this.app.use(this.logErrors);
     this.app.use(this.errorHandler);
   }
@@ -22,14 +22,12 @@ class App {
   ): void {
     next(err);
   }
-
   private errorHandler(
     err: any,
     req: Request,
     res: Response,
     next: NextFunction
   ): void {
-    console.log(err);
     if (req.xhr) {
       res.status(ResponseStatusCodes.SERVER_ERROR).send({
         error: {
