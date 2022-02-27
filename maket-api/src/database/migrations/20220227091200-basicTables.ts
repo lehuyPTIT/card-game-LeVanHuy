@@ -26,6 +26,10 @@ export default {
           type: Sequelize.STRING,
           allowNull: false,
         },
+        coins: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
 
         created_at: {
           type: Sequelize.DATE,
@@ -61,7 +65,7 @@ export default {
           allowNull: false,
         },
         type: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.STRING,
           allowNull: false,
         },
         price: {
@@ -82,7 +86,8 @@ export default {
         cardModelAttributes as ModelAttributes,
         options
       );
-      const collectionModelAttributes: DBModelFieldInit<any> = {
+
+      const collectionItemModelAttributes: DBModelFieldInit<any> = {
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
@@ -98,28 +103,8 @@ export default {
           onUpdate: "CASCADE",
           onDelete: "CASCADE",
         },
-        created_at: {
-          type: Sequelize.DATE,
-          allowNull: false,
-        },
-        updated_at: {
-          type: Sequelize.DATE,
-          allowNull: true,
-        },
-      };
-      await queryInterface.createTable(
-        DataBaseTableNames.COLLECTION,
-        collectionModelAttributes as ModelAttributes,
-        options
-      );
 
-      const collectionItemModelAttributes: DBModelFieldInit<any> = {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-        },
-        cart_id: {
+        card_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {
@@ -132,6 +117,16 @@ export default {
         status: {
           type: Sequelize.INTEGER,
           allowNull: false,
+        },
+        quantity: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          defaultValue: 0,
+        },
+        total_price: {
+          type: Sequelize.FLOAT,
+          allowNull: false,
+          defaultValue: 0,
         },
         created_at: {
           type: Sequelize.DATE,

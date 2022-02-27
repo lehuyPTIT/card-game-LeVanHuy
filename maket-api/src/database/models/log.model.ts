@@ -7,33 +7,24 @@ import { db } from "../db.provider";
 
 import { associative } from "./associate.decorator";
 
-export interface ICardModel {
+export interface ILogModel {
   id?: number;
-  name?: string;
-  image?: string;
-  power?: string;
-  type?: string;
-  price?: string;
+  collection_id?: number;
+  action?: number;
   created_at?: string;
   updated_at?: string;
 }
 
-const modelAttributes: DBModelFieldInit<ICardModel> = {
+const modelAttributes: DBModelFieldInit<ILogModel> = {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  name: {
-    type: DataTypes.STRING,
-  },
-  image: {
-    type: DataTypes.STRING,
-  },
-  power: {
+  collection_id: {
     type: DataTypes.INTEGER,
   },
-  type: {
+  action: {
     type: DataTypes.STRING,
   },
   created_at: {
@@ -47,18 +38,16 @@ const modelAttributes: DBModelFieldInit<ICardModel> = {
 };
 
 @associative
-export class CardDBModel extends Model {
+export class LogDBModel extends Model {
   static associate({ CollectionItemDBModel }: any) {
-    this.belongsToMany(CollectionItemDBModel, {
-      through: DataBaseTableNames.COLLECTION_ITEM,
-    });
+    this.belongsTo(CollectionItemDBModel, { foreignKey: "collection_id" });
   }
 }
 
-CardDBModel.init(modelAttributes as ModelAttributes, {
+LogDBModel.init(modelAttributes as ModelAttributes, {
   sequelize: db,
-  modelName: DataBaseTableNames.CARD,
-  tableName: DataBaseTableNames.CARD,
+  modelName: DataBaseTableNames.LOG,
+  tableName: DataBaseTableNames.LOG,
   createdAt: "created_at",
   timestamps: true,
 });

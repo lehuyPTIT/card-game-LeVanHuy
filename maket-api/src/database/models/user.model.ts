@@ -9,6 +9,7 @@ export interface IAuthUser {
   id: number;
   email: string;
   password: string;
+  coins: number;
 }
 
 export const blackListedUsersAttributes = ["password"];
@@ -38,10 +39,22 @@ const modelAttributes: DBModelFieldInit<IAuthUser> = {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  coins: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 10,
+  },
 };
 
 @associative
-export class UserDBModel extends Model {}
+export class UserDBModel extends Model {
+  static associate({ CollectionItemDBModel }: any) {
+    this.belongsToMany(CollectionItemDBModel, {
+      through: DataBaseTableNames.COLLECTION_ITEM,
+      foreignKey: "user_id",
+    });
+  }
+}
 
 UserDBModel.init(modelAttributes as ModelAttributes, {
   sequelize: db,

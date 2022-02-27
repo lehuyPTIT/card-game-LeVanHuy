@@ -1,4 +1,5 @@
 import { DataTypes, Model, ModelAttributes, Sequelize } from "sequelize";
+import { UserDBModel } from ".";
 
 import { DataBaseTableNames } from "../constants";
 import { CardPowerEnums } from "../constants/card.enum";
@@ -7,34 +8,39 @@ import { db } from "../db.provider";
 
 import { associative } from "./associate.decorator";
 
-export interface ICardModel {
+export interface ICollectionItemModel {
   id?: number;
-  name?: string;
-  image?: string;
-  power?: string;
-  type?: string;
-  price?: string;
+  user_id?: number;
+  card_id?: number;
+  status?: number;
+  quantity?: number;
+  total_price?: number;
   created_at?: string;
   updated_at?: string;
 }
 
-const modelAttributes: DBModelFieldInit<ICardModel> = {
+const modelAttributes: DBModelFieldInit<ICollectionItemModel> = {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  name: {
-    type: DataTypes.STRING,
-  },
-  image: {
-    type: DataTypes.STRING,
-  },
-  power: {
+  user_id: {
     type: DataTypes.INTEGER,
   },
-  type: {
-    type: DataTypes.STRING,
+  card_id: {
+    type: DataTypes.INTEGER,
+  },
+  status: {
+    type: DataTypes.INTEGER,
+  },
+  quantity: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  total_price: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
   },
   created_at: {
     type: DataTypes.DATE,
@@ -47,15 +53,17 @@ const modelAttributes: DBModelFieldInit<ICardModel> = {
 };
 
 @associative
-export class CardDBModel extends Model {
-  static associate({ CollectionItemDBModel }: any) {
-    this.belongsToMany(CollectionItemDBModel, {
-      through: DataBaseTableNames.COLLECTION_ITEM,
+export class CollectionItemDBModel extends Model {
+  static associate({ UserDbModel, LogDBModel, CardDBModel }: any) {
+    this.belongsTo(UserDbModel, { foreignKey: "user_id" });
+    this.belongsTo(CardDBModel, { foreignKey: "card_id" });
+    this.belongsToMany(LogDBModel, {
+      through: DataBaseTableNames.LOG,
     });
   }
 }
 
-CardDBModel.init(modelAttributes as ModelAttributes, {
+CollectionItemDBModel.init(modelAttributes as ModelAttributes, {
   sequelize: db,
   modelName: DataBaseTableNames.CARD,
   tableName: DataBaseTableNames.CARD,
