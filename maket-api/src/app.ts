@@ -20,6 +20,7 @@ class App {
     res: Response,
     next: NextFunction
   ): void {
+    console.log(err);
     next(err);
   }
   private errorHandler(

@@ -5,7 +5,7 @@ export const config = {
   ENV: process.env.NODE_ENV || "local",
   PORT: parseInt((process.env.PORT as string) || "3000", 10),
 
-  DB_HOST: process.env.DB_HOST || "localhost",
+  DB_HOST: process.env.DB_HOST || "db",
   DB_PORT: process.env.DB_PORT || 3306,
   DB_NAME: process.env.DB_NAME || "maket_db",
   DB_USERNAME: process.env.DB_USER || "dev",

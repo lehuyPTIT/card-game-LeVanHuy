@@ -28,5 +28,6 @@ export const isEmailRegisteredMiddleware = async (
       errors.UNAUTHORIZED_WRONG_CREDENTIALS.code
     );
   }
+  console.log("vaaaaaaaaaaaaaa3");
   req.user = user;
 };

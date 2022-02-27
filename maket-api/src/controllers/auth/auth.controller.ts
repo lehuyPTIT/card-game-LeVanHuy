@@ -1,4 +1,3 @@
-import { ITokens } from "./../../models/tokens.model";
 import { generateToken } from "./../../helpers/token-generator.helper";
 import { IRequestExtended } from "./../../models/request-extended.model";
 import { IAuthUser } from "../../database/models";

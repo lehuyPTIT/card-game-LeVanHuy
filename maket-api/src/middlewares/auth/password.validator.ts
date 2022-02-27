@@ -8,8 +8,7 @@ import { ResponseStatusCodes } from "../../constants";
 
 export const passwordValidatorMiddleware = async (
   req: IRequestExtended,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) => {
   const { id } = req.user as IAuthUser;
   const { password } = req.body;
