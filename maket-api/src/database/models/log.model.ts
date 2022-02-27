@@ -49,5 +49,6 @@ LogDBModel.init(modelAttributes as ModelAttributes, {
   modelName: DataBaseTableNames.LOG,
   tableName: DataBaseTableNames.LOG,
   createdAt: "created_at",
+  updatedAt: "updated_at",
   timestamps: true,
 });

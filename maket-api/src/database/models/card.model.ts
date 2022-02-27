@@ -1,4 +1,4 @@
-import { DataTypes, Model, ModelAttributes, Sequelize } from "sequelize";
+import { DataTypes, DATE, Model, ModelAttributes, Sequelize } from "sequelize";
 
 import { DataBaseTableNames } from "../constants";
 import { CardPowerEnums } from "../constants/card.enum";
@@ -12,8 +12,8 @@ export interface ICardModel {
   name?: string;
   image?: string;
   power?: string;
-  type?: string;
-  price?: string;
+  type?: number;
+  price?: number;
   created_at?: string;
   updated_at?: string;
 }
@@ -34,15 +34,17 @@ const modelAttributes: DBModelFieldInit<ICardModel> = {
     type: DataTypes.INTEGER,
   },
   type: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
+  },
+  price: {
+    type: DataTypes.INTEGER,
   },
   created_at: {
     type: DataTypes.DATE,
-    defaultValue: Sequelize.literal("UTC_TIMESTAMP"),
+    defaultValue: DataTypes.NOW,
   },
   updated_at: {
     type: DataTypes.DATE,
-    defaultValue: Sequelize.literal("UTC_TIMESTAMP"),
   },
 };
 
@@ -60,5 +62,6 @@ CardDBModel.init(modelAttributes as ModelAttributes, {
   modelName: DataBaseTableNames.CARD,
   tableName: DataBaseTableNames.CARD,
   createdAt: "created_at",
+  updatedAt: "updated_at",
   timestamps: true,
 });

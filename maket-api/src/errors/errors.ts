@@ -3,6 +3,7 @@ export const errors = {
     code: 4011,
     message: "Wrong email or password",
   },
+
   UNAUTHORIZED_INVALID_TOKEN: {
     message: "Token is invalid or expired",
     code: 4012,
@@ -23,5 +24,8 @@ export const errors = {
   BAD_REQUEST_USER_ALREADY_EXIST: {
     message: "User already exist",
     code: 4001,
+  },
+  BAD_REQUEST: {
+    code: 4011,
   },
 };

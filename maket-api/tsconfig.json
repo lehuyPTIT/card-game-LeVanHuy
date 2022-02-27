@@ -13,5 +13,7 @@
       "*": ["node_modules/*"]
     }
   },
+  "baseUrl": " type ",
+  "typeRoots": [" type "],
   "include": ["src/**/*"]
 }

@@ -1,4 +1,5 @@
 import { ModelAttributes, QueryInterface, QueryOptions } from "sequelize";
+import sequelize from "sequelize";
 import { DataBaseTableNames } from "../constants";
 import { DBModelFieldInit } from "../db-structure.model";
 import { migrationWrapper } from "../transactions";
@@ -34,6 +35,7 @@ export default {
         created_at: {
           type: Sequelize.DATE,
           allowNull: false,
+          defaultValue: sequelize.fn("NOW"),
         },
         updated_at: {
           type: Sequelize.DATE,
@@ -75,6 +77,7 @@ export default {
         created_at: {
           type: Sequelize.DATE,
           allowNull: false,
+          defaultValue: sequelize.fn("NOW"),
         },
         updated_at: {
           type: Sequelize.DATE,
@@ -131,6 +134,7 @@ export default {
         created_at: {
           type: Sequelize.DATE,
           allowNull: false,
+          defaultValue: sequelize.fn("NOW"),
         },
         updated_at: {
           type: Sequelize.DATE,
@@ -166,6 +170,7 @@ export default {
         created_at: {
           type: Sequelize.DATE,
           allowNull: false,
+          defaultValue: sequelize.fn("NOW"),
         },
         updated_at: {
           type: Sequelize.DATE,

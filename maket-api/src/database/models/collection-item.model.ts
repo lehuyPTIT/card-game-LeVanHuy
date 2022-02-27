@@ -68,5 +68,6 @@ CollectionItemDBModel.init(modelAttributes as ModelAttributes, {
   modelName: DataBaseTableNames.CARD,
   tableName: DataBaseTableNames.CARD,
   createdAt: "created_at",
+  updatedAt: "updated_at",
   timestamps: true,
 });
